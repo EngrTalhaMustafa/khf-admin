@@ -1,0 +1,28 @@
+.header{
+     text-align: 'center' !important;
+     background-color: '#D70F64' !important;
+     box-shadow: '0 2px 8px 0 rgba(0,0,0,0.08)' !important; 
+    }
+
+    .menu{
+        background-color: #D70F64 !important;
+        line-height: 62px;
+        color: white;
+    }
+    
+    .logo {
+        margin-right: 20px;
+        width: 88px;
+        height: 100%;
+        /* background: rgba(255, 255, 255, 0.2); */
+        float: left;
+        display: flex;
+        justify-content: left;
+        align-items: center;
+        margin-left: 24px;
+      }
+    
+      Header{
+        position: fixed; z-index: 1; width: 100%;
+      }
+    
