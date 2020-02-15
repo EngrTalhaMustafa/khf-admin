@@ -4,8 +4,9 @@ import '../../App.css';
 import Highlighter from 'react-highlight-words';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import AppDrawer from '../drawer/drawer';
+import CheifRequestDrawer from '../drawer/cheifRequestViewdrawer';
 import AppTable from '../table/table';
+
 class ChiefRegistraionReuqest extends Component {
   constructor(props) {
     super(props);
@@ -13,22 +14,14 @@ class ChiefRegistraionReuqest extends Component {
       isLoading: true,
       data: [],
     }
-    this.childTwo = React.createRef();
+ 
   }
   componentDidMount() {
-    axios.get('https://jsonplaceholder.typicode.com/todos')
+    axios.get('http://localhost:3000/admin/chef-requests')
       .then(res => {
         this.setState({
           isLoading: false,
-          data: res.data.slice(0, 10).map(e => {
-            let req = {
-              name: e.userId,
-              number: e.id,
-              status: e.completed,
-              area: e.title
-            }
-            return req;
-          })
+          data: res.data.map(req=>{req['key']=req.id;return req})
         })
       })
       .catch(e => {
@@ -40,9 +33,8 @@ class ChiefRegistraionReuqest extends Component {
   }
 
   handleSelectClick = (obj) => {
-    // this.child.showDrawer()
+    console.log("MNMNMN",obj)
     this.props.selectChiefRequest(obj);
-    this.props.updateFirstDrawerData(obj)
     this.props.openDrawer();
   };
 
@@ -52,7 +44,7 @@ class ChiefRegistraionReuqest extends Component {
     console.log(data);
     return (
       <div className="margin-top-62px">
-        <AppDrawer ref={(cd) => this.child = cd} />
+        <CheifRequestDrawer ref={(cd) => this.child = cd} />
         <AppTable
           type={"cheifRequestColumns"}
           data={data}
@@ -71,10 +63,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    selectChiefRequest: (obj) => { dispatch({ type: "SELECT_CHEIF_REQUEST", payload: obj }) },
-    updateFirstDrawerData: (obj) => { dispatch({ type: "UPDATE_FIRST_DRAWER_DATA", payload: obj }) },
-    openDrawer: () => { dispatch({ type: "OPEN_DRAWER_STATE" }) }
+    selectChiefRequest: (obj) => { dispatch({ type: "SELECT_CHIEF_REQUEST", payload: obj }) },
+    openDrawer: () => { dispatch({ type: 'OPEN_CHEIF_REQUEST_DRAWER' }) }
   }
 }
-
 export default connect(mapStateToProps, mapDispatchToProps)(ChiefRegistraionReuqest);

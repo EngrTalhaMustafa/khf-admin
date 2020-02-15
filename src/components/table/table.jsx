@@ -12,7 +12,7 @@ class AppTable extends Component {
         }
     }
 
-    handleSelectHandlerInTable =(data)=>{
+    handleSelectHandlerInTable = (data) => {
         this.props.handleSelectHandlerInComponent(data);
     }
 
@@ -83,51 +83,58 @@ class AppTable extends Component {
         this.setState({ ...this.state, searchText: '' });
     };
 
-    handleSelectClick = (record)=>{
+    handleSelectClick = (record) => {
         this.props.handleSelectChild(record);
     }
 
     render() {
-       const comsColumns = {
-            cheifRequestColumns: 
-            [      
-                {
-          
-                  title: 'Name',
-                  dataIndex: 'name',
-                  key: 'name',
-                  width: '15%',
-                  ...this.getColumnSearchProps('name'),
+        const comsColumns = {
+            cheifRequestColumns:
+                [{
+
+                    title: 'Id',
+                    dataIndex: 'id',
+                    key: 'id',
+                    width: '15%',
+                    ...this.getColumnSearchProps('id'),
                 },
                 {
-                  title: 'Area',
-                  dataIndex: 'area',
-                  key: 'area',
-                  width: '20%',
-                  ...this.getColumnSearchProps('area'),
+
+                    title: 'Name',
+                    dataIndex: 'fullName',
+                    key: 'fullName',
+                    width: '15%',
+                    ...this.getColumnSearchProps('fullName'),
                 },
                 {
-                  title: 'Number',
-                  dataIndex: 'number',
-                  key: 'number',
-                  ...this.getColumnSearchProps('number'),
+                    title: 'Area',
+                    dataIndex: 'fullAddress',
+                    key: 'fullAddress',
+                    width: '20%',
+                    ...this.getColumnSearchProps('fullAddress'),
                 },
                 {
-                  title: 'Status',
-                  dataIndex: 'status',
-                  key: 'status',
-                  ...this.getColumnSearchProps('status'),
+                    title: 'Number',
+                    dataIndex: 'mobilePhoneNumber',
+                    key: 'mobilePhoneNumber',
+                    ...this.getColumnSearchProps('mobilePhoneNumber'),
                 },
                 {
-                  title: 'Action',
-                  key: 'operation',
-                  fixed: 'right',
-                  width: 100,
-                  render: (record) => {
-                   return <a onClick={this.handleSelectClick.bind(this,record)}>Hello</a>
-                  }
+                    title: 'Status',
+                    dataIndex: 'status',
+                    key: 'status',
+                    ...this.getColumnSearchProps('status'),
+                },
+                {
+                    title: 'Action',
+                    key: 'operation',
+                    fixed: 'right',
+                    width: 100,
+                    render: (record) => {
+                        return <a onClick={this.handleSelectClick.bind(this, record)}>View</a>
+                    }
                 }
-              ],
+                ],
         }
         return (
             <div className="margin-top-62px">

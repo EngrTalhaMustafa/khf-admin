@@ -1,48 +1,40 @@
 import * as actionTypes from '../actionTypes';
 const initialState = {
-    allChiefRequests:[],
-    selectedChiefRequest:{},
-    testData: {'message':'hello, I am from store :)'},
-    firstDrawerData:{},
-    drawerState: false,
+    selectedRow: {},
+    cheifRequestDrawerState: false,
+    cheifRequestDrawerData: {},
+
 };
 
 
-const reducer = (state=initialState,action)=>{
-    switch(action.type){
-        case actionTypes.SELECT_CHEIF_REQUEST:
-            console.log("in reducer",action.type);
+const reducer = (state = initialState, action) => {
+    switch (action.type) {
+        case actionTypes.SELECT_CHIEF_REQUEST:
+            console.log("in reducer", action.payload);
             return {
-            ...state,
-            selectedChiefRequest: action.payload
+                ...state,
+                cheifRequestDrawerData: action.payload
             };
-        break;
+            break;
 
-        case actionTypes.UPDATE_FIRST_DRAWER_DATA:
-        console.log("in reducer",action.type);
-        return{
-            ...state,
-            firstDrawerData: action.payload
-        }
-        break;
 
-        case actionTypes.OPEN_DRAWER_STATE:
-        return{
-            ...state,
-            drawerState:true
-        }
-        break;
+        case actionTypes.OPEN_CHEIF_REQUEST_DRAWER:
+            return {
+                ...state,
+                cheifRequestDrawerState: true
+            }
+            break;
 
-        
-        case actionTypes.CLOSE_DRAWER_STATE:
-        return{
-            ...state,
-            drawerState:false
-        }
-        break;
+
+        case actionTypes.CLOSE_CHEIF_REQUEST_DRAWER:
+            return {
+                ...state,
+                cheifRequestDrawerState: false
+            }
+            break;
 
         default:
-        return state;
+            return state;
     }
 }
 
