@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Drawer, Divider, Col, Row } from 'antd';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 const pStyle = {
     fontSize: 16,
     color: 'rgba(0,0,0,0.85)',
@@ -50,6 +51,11 @@ class CheifRequestDrawer extends Component {
         // alert(1)
         this.props.closeDrawer();
     };
+
+    editRequest = () => {
+        this.props.editRequest();
+    }
+
     render() {
         // console.log("drawerData",this.props.drawerData);
         let data = this.props.cheifRequestDrawerData;
@@ -68,7 +74,11 @@ class CheifRequestDrawer extends Component {
                             <DescriptionItem title="Request Id # " content={`${data.id}`} />
                         </Col>
                         <Col span={12}>
-                            <button>Approve</button>
+       
+
+                            <Link onClick={this.onClose} to="edit-cheif">aa</Link>
+
+                            {/* <Link to={`/edit-cheif/${data.id}`}>Edit</Link> */}
                         </Col>
                     </Row>
                     <Divider />

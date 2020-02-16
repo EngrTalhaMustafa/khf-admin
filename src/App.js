@@ -13,14 +13,16 @@ import Accounts from './components/accounts/accounts';
 import Disputes from './components/disputes/disputes';
 import Support from './components/support/support';
 import Layoutt from './components/layout/layout';
-
+import MakeCheif from './components/make-cheif/makeCheif';
 function App() {
   return (
+    
     <Router>
       <Layoutt/>
-      <Route exact path="/dashboard" component={Dashboard}>Dashboard</Route>
-      <Route exact path="/chief-registration-reqeuests" component={ChiefRegistraionReuqest}>ChiefRegistraionReuqest</Route>
-      <Route exact path="/rider-registration-reqeuests" component={RiderRegistrationRequest}>RiderRegistrationRequest</Route>
+      {/* <Route exact path="/dashboard" component={Dashboard}>Dashboard</Route> */}
+      {/* <Route exact path="/chief-registration-reqeuests" component={ChiefRegistraionReuqest}>ChiefRegistraionReuqest</Route> */}
+      <Route exact path="/rider-registration-reqeuests" component={RiderRegistrationRequest}>RiderRegistrationRequest
+      </Route>
       <Route exact path="/chiefs" component={Chiefs}>Chiefs</Route>
       <Route exact path="/riders" component={Rider}>Riders</Route>
       <Route exact path="/customers" component={Customers}>Customers</Route>
@@ -28,6 +30,7 @@ function App() {
       <Route exact path="/accounts" component={Accounts}>Accounts</Route>
       <Route exact path="/disputes" component={Disputes}>Disputes</Route>
       <Route exact path="/support" component={Support}>Support</Route> 
+      {/* <Route exact path="/aa" component={MakeCheif}></Route>  */}
     </Router>
   
   
