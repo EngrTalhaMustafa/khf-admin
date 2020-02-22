@@ -43,7 +43,7 @@ class ChiefRegistraionReuqest extends Component {
   };
 
   editRequest = ()=>{
-    alert(1)
+    // alert(1)
     console.log(this.props)
     // this.props.location.push('/edit-cheif-request')
   }

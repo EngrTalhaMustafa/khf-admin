@@ -89,6 +89,123 @@ class AppTable extends Component {
 
     render() {
         const comsColumns = {
+            cheifAccountsWeeksColumns:[
+                {
+                    title: 'Id',
+                    dataIndex: 'id',
+                    key: 'id',
+                    width: '15%',
+                    ...this.getColumnSearchProps('id'),
+                },
+                {
+                    title: 'Action',
+                    key: 'operation',
+                    // fixed: 'right',
+                    width: 100,
+                    render: (record) => {
+                        return <a onClick={this.handleSelectClick.bind(this, record)}>View</a>
+                    }
+                },
+            ],
+            cheifColumns:[
+                {
+                    title: 'Id',
+                    dataIndex: 'id',
+                    key: 'id',
+                    width: '15%',
+                    ...this.getColumnSearchProps('id'),
+                },
+                {
+                    title: 'User Name',
+                    dataIndex: 'userName',
+                    key: 'userName',
+                    width: '15%',
+                    ...this.getColumnSearchProps('userName'),
+                },
+                {
+                    title: 'Name',
+                    dataIndex: 'fullName',
+                    key: 'fullName',
+                    width: '15%',
+                    ...this.getColumnSearchProps('fullName'),
+                },
+                {
+                    title: 'Address',
+                    dataIndex: 'fullAddress',
+                    key: 'fullAddress',
+                    width: '15%',
+                    ...this.getColumnSearchProps('fullAddress'),
+                },
+                {
+                    title: 'Status',
+                    dataIndex: 'status',
+                    key: 'status',
+                    width: '15%',
+                    ...this.getColumnSearchProps('status'),
+                },
+                {
+                    title: 'Phone Number',
+                    dataIndex: 'mobilePhoneNumber',
+                    key: 'mobilePhoneNumber',
+                    width: '15%',
+                    ...this.getColumnSearchProps('mobilePhoneNumber'),
+                },
+                {
+                    title: 'Action',
+                    key: 'operation',
+                    // fixed: 'right',
+                    width: 100,
+                    render: (record) => {
+                        return <a onClick={this.handleSelectClick.bind(this, record)}>View</a>
+                    }
+                },
+            ],
+            menuItemsColumns: [
+                {
+                    title: 'Id',
+                    dataIndex: 'id',
+                    key: 'id',
+                    width: '15%',
+                    ...this.getColumnSearchProps('id'),
+                },
+                {
+                    title: 'Dish Name',
+                    dataIndex: 'name',
+                    key: 'name',
+                    width: '15%',
+                    ...this.getColumnSearchProps('name'),
+                },
+                {
+                    title: 'Price',
+                    dataIndex: 'price',
+                    key: 'price',
+                    width: '15%',
+                    ...this.getColumnSearchProps('price'),
+                },
+                {
+                    title: 'Quantity Per Unit',
+                    dataIndex: 'quantity_per_unit',
+                    key: 'quantity_per_unit',
+                    width: '15%',
+                    ...this.getColumnSearchProps('quantity_per_unit'),
+                },
+                {
+                    title: 'Is Active',
+                    dataIndex: 'isActive',
+                    key: 'isActive',
+                    width: '15%',
+                    ...this.getColumnSearchProps('isActive'),
+                },
+                {
+                    title: 'Action',
+                    key: 'operation',
+                    // fixed: 'right',
+                    width: 100,
+                    render: (record) => {
+                        return <a onClick={this.handleSelectClick.bind(this, record)}>View</a>
+                    }
+                },
+            ],
             cheifRequestColumns:
                 [{
 
@@ -99,7 +216,6 @@ class AppTable extends Component {
                     ...this.getColumnSearchProps('id'),
                 },
                 {
-
                     title: 'Name',
                     dataIndex: 'fullName',
                     key: 'fullName',
@@ -137,7 +253,7 @@ class AppTable extends Component {
                 ],
         }
         return (
-            <div className="margin-top-62px">
+            <div>
                 <Table columns={comsColumns[this.props.type]} dataSource={this.props.data} />
             </div>
         );

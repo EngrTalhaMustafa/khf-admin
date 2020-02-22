@@ -19,19 +19,19 @@ export default class MenuBar extends Component {
       >
         <Menu.Item key="0"><Link to='/dashboard' /> Dashboard</Menu.Item>
         <Menu.Item key="1"><Link to='/orders' /> Orders</Menu.Item>
-        <Menu.Item key="2"><Link to='/chief-registration-requests' />Cheif Requests</Menu.Item>
+        <Menu.Item key="2"><Link to='/chief-registration-reqeuests' />Cheif Requests</Menu.Item>
         <Menu.Item key="3"><Link to='/rider-registration-requests' />Riders Requests</Menu.Item>
          <SubMenu
             key="4"
             title={
               <span>
                 <Icon type="user" />
-                Accounts
+                Profiles
               </span>
             }
           >
             <Menu.Item key="5"><Link to='/accounts' />Riders Accounts</Menu.Item>
-            <Menu.Item key="6"><Link to='/accounts' />Chief Accounts</Menu.Item>
+            <Menu.Item key="6"><Link to='/cheifs' />Chief Accounts</Menu.Item>
             <Menu.Item key="7"><Link to='/accounts' />Users Accounts</Menu.Item>
           </SubMenu>
           <SubMenu
@@ -56,10 +56,11 @@ export default class MenuBar extends Component {
               </span>
             }
           >
-            <Menu.Item key="9"><Link to='/support' />Cheifs</Menu.Item>
-            <Menu.Item key="10"><Link to='/support' />Riders</Menu.Item>
-            <Menu.Item key="11"><Link to='/support' />Users</Menu.Item>
+            <Menu.Item key="13"><Link to='/support' />Cheifs</Menu.Item>
+            <Menu.Item key="14"><Link to='/support' />Riders</Menu.Item>
+            <Menu.Item key="15"><Link to='/support' />Users</Menu.Item>
           </SubMenu>
+          <Menu.Item key="16"><Link to="/menu" />Menu</Menu.Item>
       </Menu>
             </Sider>
      </div> 

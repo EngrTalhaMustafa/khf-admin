@@ -6,20 +6,52 @@ import TextInput from '../form-components/text-input';
 import NumberInput from '../form-components/number-input';
 import RadioField from '../form-components/radio-field';
 import SelectField from '../form-components/select-field';
+import axios from 'axios';
 class MakeCheif extends Component {
     constructor(props) {
         super(props);
         this.state = {
             cheif: {
                 ...this.props.cheifRequestData,
+                userName: `KHF-CH-${this.props.cheifRequestData.id}`,
+                password: `${btoa(new Date().getMilliseconds()).concat(btoa(new Date().getUTCSeconds())).slice(0, 8)}`,
             }
         }
+        console.log(this.props.cheifRequestData)
+    }
+
+    createChefSubmitHandler = event => {
+        axios.post('http://localhost:3000/admin/chef', this.state.cheif)
+            .then(chef => {
+                console.log("chef created!", chef)
+            })
+            .catch(e => {
+                console.log("error while creating chef!", e)
+            })
+    }
+
+    selectChangeHandler = (name, value) => {
+        console.log(name, value)
+        this.setState({
+            ...this.state,
+            cheif: {
+                ...this.state.cheif,
+                [name]: value,
+            }
+        },()=>{
+
+            console.log(this.state.cheif)
+        }
+        )
+
     }
 
     changeHandler = event => {
+        // console.log(event)
         event.preventDefault();
         const name = event.target.name;
         const value = event.target.value;
+        console.log(name, event.target)
         this.setState({
             ...this.state,
             cheif: {
@@ -29,14 +61,16 @@ class MakeCheif extends Component {
                     value: value
                 },
             }
-        })
+        }
+        )
+        // console.log(this.state.cheif)
 
         // console.log(this.state.cheif.fullAddress.value)
-
+        
     }
 
     genderOptions = [{ value: "m", name: "male" }, , { value: "f", name: "female" }, { value: "o", name: "other" }]
-    status = [{name:"Pending",value:"pending"}, {name:"Inprocess",value:"inprocess"}, {name:"Approved",value:"approved"},{name:"Disapproved",value:"disapproved"}];
+    statusOp = [{ name: "Pending", value: "pending" }, { name: "Inprocess", value: "inprocess" }, { name: "Approved", value: "approved" }, { name: "Disapproved", value: "disapproved" }];
 
     render() {
         return (
@@ -46,17 +80,31 @@ class MakeCheif extends Component {
                 <Card title={this.state.cheif.id}>
                     <Row>
                         <Col span={24}>
-                            <Form {...formLayout} layout="vertical" onSubmit={this.submitHandler}>
+                            <Form layout="vertical" onSubmit={this.submitHandler}>
                                 <Row>
-                                    <Form.Item label="Status">
+                                    <Form.Item>
                                         <SelectField name="status"
                                             value={this.state.cheif.status}
+                                            selectChangeHandler={this.selectChangeHandler}
+                                            options={this.statusOp}
+                                        />
+                                    </Form.Item>
+                                    <Form.Item label="Username">
+                                        <TextInput name="userName"
+                                            value={this.state.cheif.userName}
                                             onChange={this.changeHandler}
-                                            options={this.status}
                                         />
                                     </Form.Item>
 
-                                    <Col span={12}>
+                                    <Form.Item label="Password">
+                                        <TextInput name="password"
+                                            value={this.state.cheif.password}
+                                            onChange={this.changeHandler}
+                                        />
+                                    </Form.Item>
+
+                                    <Divider />
+                                    <Col span={7}>
                                         <Form.Item label="Full Address">
                                             <TextInput name="fullAddress"
                                                 value={this.state.cheif.fullAddress}
@@ -97,7 +145,7 @@ class MakeCheif extends Component {
                                             />
                                         </Form.Item>
                                     </Col>
-                                    <Col span={12}>
+                                    <Col span={7} push={2}>
                                         <Form.Item label="Full Name">
                                             <TextInput name="fullName"
                                                 value={this.state.cheif.fullName}
@@ -138,7 +186,7 @@ class MakeCheif extends Component {
 
                                     <Button.Group size={"large"}>
 
-                                        <Button onClick={this.submitHandler} type="primary">
+                                        <Button onClick={this.createChefSubmitHandler} type="primary">
                                             Submit
                             <Icon type="right" />
                                         </Button>
