@@ -89,6 +89,59 @@ class AppTable extends Component {
 
     render() {
         const comsColumns = {
+            ordersColumns:[
+                {
+                    title: 'Id',
+                    dataIndex: 'id',
+                    key: 'id',
+                    // width: '15%',
+                    ...this.getColumnSearchProps('id'),
+                },
+                {
+                    title: 'Status',
+                    dataIndex: 'status',
+                    key: 'status',
+                    // width: '15%',
+                    ...this.getColumnSearchProps('status'),
+                },
+                {
+                    title: 'Customer Name',
+                    dataIndex: 'customer_name',
+                    key: 'customer_name',
+                    // width: '15%',
+                    ...this.getColumnSearchProps('customer_name'),
+                },
+                {
+                    title: 'Customer Number',
+                    dataIndex: 'phone_no',
+                    key: 'phone_no',
+                    // width: '15%',
+                    ...this.getColumnSearchProps('phone_no'),
+                },
+                {
+                    title: 'City',
+                    dataIndex: 'city.name',
+                    key: 'city.name',
+                    // width: '15%',
+                    ...this.getColumnSearchProps('city.name'),
+                },
+                {
+                    title: 'Area',
+                    dataIndex: 'area',
+                    key: 'area',
+                    // width: '15%',
+                    ...this.getColumnSearchProps('area'),
+                },
+                {
+                    title: 'Action',
+                    key: 'operation',
+                    // fixed: 'right',
+                    width: 100,
+                    render: (record) => {
+                        return <a onClick={this.handleSelectClick.bind(this, record)}>View</a>
+                    }
+                },
+            ],
             cheifAccountsWeeksColumns:[
                 {
                     title: 'Id',
@@ -184,10 +237,10 @@ class AppTable extends Component {
                 },
                 {
                     title: 'Quantity Per Unit',
-                    dataIndex: 'quantity_per_unit',
-                    key: 'quantity_per_unit',
+                    dataIndex: 'quantityPerUnit',
+                    key: 'quantityPerUnit',
                     width: '15%',
-                    ...this.getColumnSearchProps('quantity_per_unit'),
+                    ...this.getColumnSearchProps('quantityPerUnit'),
                 },
                 {
                     title: 'Is Active',
@@ -251,7 +304,61 @@ class AppTable extends Component {
                     }
                 }
                 ],
-        }
+                riderRequestColumns:
+                [{
+
+                    title: 'Id',
+                    dataIndex: 'id',
+                    key: 'id',
+                    width: '15%',
+                    ...this.getColumnSearchProps('id'),
+                },
+                {
+                    title: 'First Name',
+                    dataIndex: 'first_name',
+                    key: 'first_name',
+                    width: '15%',
+                    ...this.getColumnSearchProps('first_name'),
+                },
+                {
+                    title: 'Last Name',
+                    dataIndex: 'last_name',
+                    key: 'last_name',
+                    width: '15%',
+                    ...this.getColumnSearchProps('last_name'),
+                },
+                {
+                    title: 'Area',
+                    dataIndex: 'address',
+                    key: 'address',
+                    width: '20%',
+                    ...this.getColumnSearchProps('address'),
+                },
+                {
+                    title: 'Number',
+                    dataIndex: 'phone_no',
+                    key: 'phone_no',
+                    ...this.getColumnSearchProps('phone_no'),
+                },
+                {
+                    title: 'Status',
+                    dataIndex: 'status',
+                    key: 'status',
+                    ...this.getColumnSearchProps('status'),
+                },
+                {
+                    title: 'Action',
+                    key: 'operation',
+                    fixed: 'right',
+                    width: 100,
+                    render: (record) => {
+                        return <a onClick={this.handleSelectClick.bind(this, record)}>View</a>
+                    }
+                }
+                ],
+
+            }
+            console.log(this.props.data)
         return (
             <div>
                 <Table columns={comsColumns[this.props.type]} dataSource={this.props.data} />

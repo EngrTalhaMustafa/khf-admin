@@ -7,34 +7,26 @@ import NumberInput from '../form-components/number-input';
 import RadioField from '../form-components/radio-field';
 import SelectField from '../form-components/select-field';
 import axios from 'axios';
-import Swal from 'sweetalert2';
-
-class MakeCheif extends Component {
+class MakeRider extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            cheif: {
-                ...this.props.cheifRequestData,
-                userName: `KHF-CH-${this.props.cheifRequestData.id}`,
+            rider: {
+                ...this.props.riderRequestData,
+                userName: `KHF-RD-${this.props.riderRequestData.id}`,
                 password: `${btoa(new Date().getMilliseconds()).concat(btoa(new Date().getUTCSeconds())).slice(0, 8)}`,
             }
         }
-        console.log(this.props.cheifRequestData)
+        console.log(this.props.riderRequestData)
     }
 
-    createChefSubmitHandler = event => {
-        axios.post('http://localhost:3000/admin/chef', this.state.cheif)
-            .then(chef => {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Chef Created Sucessfully!',
-                    showConfirmButton: false,
-                    timer: 3500
-                  });
-                console.log("chef created!", chef)
+    createRiderSubmitHandler = event => {
+        axios.post('http://localhost:3000/admin/rider', this.state.rider)
+            .then(rider => {
+                console.log("rider created!", rider)
             })
             .catch(e => {
-                console.log("error while creating chef!", e)
+                console.log("error while creating rider!", e)
             })
     }
 
@@ -43,65 +35,65 @@ class MakeCheif extends Component {
         this.setState({
             ...this.state,
             cheif: {
-                ...this.state.cheif,
+                ...this.state.rider,
                 [name]: value,
             }
         },()=>{
 
-            console.log(this.state.cheif)
+            console.log(this.state.rider)
         }
         )
 
     }
 
     changeHandler = event => {
+        // console.log(event)
         event.preventDefault();
         const name = event.target.name;
         const value = event.target.value;
         console.log(name, event.target)
         this.setState({
             ...this.state,
-            cheif: {
-                ...this.state.cheif,
+            rider: {
+                ...this.state.rider,
                 [name]: {
-                    ...this.state.cheif[name],
+                    ...this.state.rider[name],
                     value: value
                 },
             }
         }
-        )        
+        )
     }
 
-    genderOptions = [{ value: "m", name: "male" }, , { value: "f", name: "female" }, { value: "o", name: "other" }]
+    genderOptions = [{ value: "Male", name: "Male" }, , { value: "Female", name: "Female" }]
     statusOp = [{ name: "Pending", value: "pending" }, { name: "Inprocess", value: "inprocess" }, { name: "Approved", value: "approved" }, { name: "Disapproved", value: "disapproved" }];
-
     render() {
         return (
 
             <div>
                 <br /><br /><br />
-                <Card title={this.state.cheif.id}>
+                <Card title={this.state.rider.id}>
                     <Row>
                         <Col span={24}>
                             <Form layout="vertical" onSubmit={this.submitHandler}>
                                 <Row>
                                     <Form.Item>
                                         <SelectField name="status"
-                                            value={this.state.cheif.status}
+                                            value={this.state.rider.status}
                                             selectChangeHandler={this.selectChangeHandler}
                                             options={this.statusOp}
                                         />
                                     </Form.Item>
                                     <Form.Item label="Username">
                                         <TextInput name="userName"
-                                            value={this.state.cheif.userName}
+                                            value={this.state.rider.userName}
                                             onChange={this.changeHandler}
                                         />
                                     </Form.Item>
 
                                     <Form.Item label="Password">
                                         <TextInput name="password"
-                                            value={this.state.cheif.password}
+                                            value={this.state.rider.password}
                                             onChange={this.changeHandler}
                                         />
                                     </Form.Item>
@@ -110,13 +102,13 @@ class MakeCheif extends Component {
                                     <Col span={7}>
                                         <Form.Item label="Full Address">
                                             <TextInput name="fullAddress"
-                                                value={this.state.cheif.fullAddress}
+                                                value={this.state.rider.address}
                                                 onChange={this.changeHandler}
                                             />
                                         </Form.Item>
                                         <Form.Item label="City">
                                             <SelectField name="city"
-                                                value={this.state.cheif.city_id}
+                                                value={this.state.rider.city_id}
                                                 onChange={this.changeHandler}
                                                 options={[{ name: "Karachi", value: 1 }]}
                                             />
@@ -124,63 +116,57 @@ class MakeCheif extends Component {
 
                                         <Form.Item label="Postal Code">
                                             <TextInput name="postalCode"
-                                                value={this.state.cheif.postalCode}
+                                                value={this.state.rider.postal_code}
                                                 onChange={this.changeHandler}
                                             />
                                         </Form.Item>
                                         <Form.Item label="Email">
                                             <TextInput name="email"
-                                                value={this.state.cheif.email}
+                                                value={this.state.rider.email}
                                                 onChange={this.changeHandler}
                                             />
                                         </Form.Item>
                                         <Form.Item label="Mobile Number">
                                             <TextInput name="mobilePhoneNumber"
-                                                value={this.state.cheif.mobilePhoneNumber}
+                                                value={this.state.rider.phone_no}
                                                 onChange={this.changeHandler}
                                             />
                                         </Form.Item>
 
-                                        <Form.Item label="Whatapp Number">
-                                            <TextInput name="whatsAppNumber"
-                                                value={this.state.cheif.whatsAppNumber}
-                                                onChange={this.changeHandler}
-                                            />
-                                        </Form.Item>
+
                                     </Col>
                                     <Col span={7} push={2}>
                                         <Form.Item label="Full Name">
                                             <TextInput name="fullName"
-                                                value={this.state.cheif.fullName}
+                                                value={this.state.rider.first_name &&  this.state.rider.first_name.concat(this.state.rider.last_name)}
                                                 onChange={this.changeHandler}
                                             />
                                         </Form.Item>
                                         <Form.Item label="Father/Husband Name">
                                             <TextInput name="fatherHusbandName"
-                                                value={this.state.cheif.fatherHusbandName}
+                                                value={this.state.rider.father_name}
                                                 onChange={this.changeHandler}
                                             />
                                         </Form.Item>
                                         <Form.Item label="CNIC Number">
                                             <TextInput name="CNICNumber"
-                                                value={this.state.cheif.CNICNumber}
+                                                value={this.state.rider.cnic_no}
                                                 onChange={this.changeHandler}
                                             />
                                         </Form.Item>
                                         <Form.Item label="Gender">
                                             <RadioField name="gender"
-                                                value={this.state.cheif.gender}
+                                                value={this.state.rider.gender}
                                                 onChange={this.changeHandler}
                                                 options={this.genderOptions}
                                             />
                                         </Form.Item>
-                                        <Form.Item label="Age">
-                                            <NumberInput
-                                                name="age"
-                                                type="number"
-                                                value={this.state.cheif.age}
-                                                min={0} max={60}
-                                                onChange={this.changeHandler} />
+                                        <Form.Item label="Owns Bike">
+                                        <RadioField name="owns_bike"
+                                                value={this.state.rider.own_bike}
+                                                onChange={this.changeHandler}
+                                                options={[{value:true,name:"Yes"},{value:false,name:"No"}]}
+                                            />
                                         </Form.Item>
                                     </Col>
                                 </Row>
@@ -209,7 +195,7 @@ class MakeCheif extends Component {
 }
 const mapStateToProps = (state) => {
     return {
-        cheifRequestData: state.cheifRequestDrawerData,
+        riderRequestData: state.riderRequestDrawerData,
 
     }
 }
@@ -220,4 +206,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MakeCheif);
+export default connect(mapStateToProps, mapDispatchToProps)(MakeRider)

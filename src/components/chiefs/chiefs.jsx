@@ -14,7 +14,7 @@ class Chiefs extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:3000/admin/chefs')
+    axios.get('http://localhost:3000/admin/chefs?status=approved-active')
       .then(cheifs => {
         this.setState({
           ...this.state,

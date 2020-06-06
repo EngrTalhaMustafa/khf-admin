@@ -33,7 +33,7 @@ const DescriptionItem = ({ title, content }) => (
     </div>
 );
 
-class CheifRequestDrawer extends Component {
+class RiderRequestDrawer extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -57,9 +57,8 @@ class CheifRequestDrawer extends Component {
     }
 
     render() {
-        // console.log("drawerData",this.props.drawerData);
-        let data = this.props.cheifRequestDrawerData;
-        console.log(data)
+        let data = this.props.riderRequestDrawerData;
+        console.log("#0900",data)
         return (
             <div>
                 <Drawer
@@ -67,7 +66,7 @@ class CheifRequestDrawer extends Component {
                     placement="right"
                     closable={false}
                     onClose={this.onClose}
-                    visible={this.props.cheifRequestDrawerState}
+                    visible={this.props.riderRequestDrawerState}
                 >
                     <Row>
                         <Col span={12}>
@@ -76,9 +75,8 @@ class CheifRequestDrawer extends Component {
                         <Col span={12}>
        
 
-                            <Link onClick={this.onClose} to="edit-cheif">Edit</Link>
+                            <Link onClick={this.onClose} to="edit-rider">Edit</Link>
 
-                            {/* <Link to={`/edit-cheif/${data.id}`}>Edit</Link> */}
                         </Col>
                     </Row>
                     <Divider />
@@ -90,7 +88,7 @@ class CheifRequestDrawer extends Component {
 
                     <Row>
                         <Col span={12}>
-                            <DescriptionItem title="Full Name" content={data.fullName} />
+                            <DescriptionItem title="Full Name" content={data.first_name} />
                         </Col>
                         <Col span={12}>
                             <DescriptionItem title="Email" content={data.email} />
@@ -101,24 +99,19 @@ class CheifRequestDrawer extends Component {
                             <DescriptionItem title="City" content={data.city_id} />
                         </Col>
                         <Col span={12}>
-                            <DescriptionItem title="Postal Code" content={data.postalCode} />
+                            <DescriptionItem title="Postal Code" content={data.postal_code} />
                         </Col>
                     </Row>
                     <Row>
                         <Col span={12}>
-                            <DescriptionItem title="Whatsapp Number" content={data.whatsAppNumber} />
-
-                            {/* <DescriptionItem title="Age" content={`${data.age} Years Old`} /> */}
-                        </Col>
-                        <Col span={12}>
-                            <DescriptionItem title="Phone Number" content={data.mobilePhoneNumber} />
+                            <DescriptionItem title="Phone Number" content={data.phone_no} />
                         </Col>
                     </Row>
                     <Row>
                         <Col span={24}>
                             <DescriptionItem
                                 title="Address"
-                                content={data.fullAddress}
+                                content={data.address}
                             />
                         </Col>
                     </Row>
@@ -128,7 +121,7 @@ class CheifRequestDrawer extends Component {
                             <DescriptionItem title="Gender" content={data.gender} />
                         </Col>
                         <Col span={12}>
-                            <DescriptionItem title="Father/Husband" content={data.fatherHusbandName} />
+                            <DescriptionItem title="Father/Husband" content={data.father_name} />
                         </Col>
                     </Row>
                     <Divider />
@@ -148,8 +141,8 @@ class CheifRequestDrawer extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        cheifRequestDrawerState: state.cheifRequestDrawerState,
-        cheifRequestDrawerData: state.cheifRequestDrawerData,
+        riderRequestDrawerState: state.riderRequestDrawerState,
+        riderRequestDrawerData: state.riderRequestDrawerData,
     }
 };
 
@@ -157,13 +150,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        closeDrawer: () => { dispatch({ type: 'CLOSE_CHEIF_REQUEST_DRAWER' }) }
+        closeDrawer: () => { dispatch({ type: 'CLOSE_RIDER_REQUEST_DRAWER' }) }
     }
 }
 
-// AppDrawer.protoTypes ={
-//     drawerData : PropTypes.object
-// } 
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(CheifRequestDrawer);
+export default connect(mapStateToProps, mapDispatchToProps)(RiderRequestDrawer);

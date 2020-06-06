@@ -4,8 +4,8 @@ const { Option } = Select;
 
 const SelectField = props => {
     let handleChange= (event) => {
-        console.log(`selected ${event}`);
-        console.log(props.name,event)
+        // console.log(`selected ${event}`);
+        // console.log(props.name,event)
         props.selectChangeHandler(props.name,event)
     }
     return (

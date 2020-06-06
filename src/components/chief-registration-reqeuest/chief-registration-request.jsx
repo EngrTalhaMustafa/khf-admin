@@ -17,10 +17,6 @@ class ChiefRegistraionReuqest extends Component {
  
   }
   componentDidMount() {
-    // axios.post('localhost:3000/auth/chef/login',{user_name:'rider',password:'12345'})
-    // .then(e=>{console.log('result',e.data)})
-    // .catch(e=>{console.log('de',e)})
-
     axios.get('http://localhost:3000/admin/chef-requests')
       .then(res => {
         this.setState({

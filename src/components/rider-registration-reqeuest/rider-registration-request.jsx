@@ -4,7 +4,7 @@ import '../../App.css';
 import Highlighter from 'react-highlight-words';
 import axios from 'axios';
 import { connect } from 'react-redux';
-// import AppDrawer from '../drawer/drawer';
+import RiderRequestDrawer from '../drawer/riderRequestViewdrawer';
 import AppTable from '../table/table';
 class RiderRegistraionReuqest extends Component {
   constructor(props) {
@@ -13,22 +13,16 @@ class RiderRegistraionReuqest extends Component {
       isLoading: true,
       data: [],
     }
+    console.log("XXXXXXX")
   }
   componentDidMount() {
-    axios.get('https://jsonplaceholder.typicode.com/todos')
+    axios.get('http://localhost:3000/admin/rider-requests')
       .then(res => {
         this.setState({
           isLoading: false,
-          data: res.data.slice(0, 10).map(e => {
-            let req = {
-              name: e.userId,
-              number: e.id,
-              status: e.completed,
-              area: e.title
-            }
-            return req;
-          })
+          data: res.data.map(req => { req['key'] = req.id; return req })
         })
+        console.log("riderrequests", res)
       })
       .catch(e => {
         this.setState({
@@ -38,12 +32,18 @@ class RiderRegistraionReuqest extends Component {
       });
   }
 
-  handleSelectClick = (obj) => {
-    this.props.changeDrawerState({
-      
 
-    });
+  handleSelectClick = (obj) => {
+    this.props.selectRiderRequest(obj);
+    this.props.openDrawer();
   };
+
+  
+  editRequest = ()=>{
+    // alert(1)
+    console.log(this.props)
+    // this.props.location.push('/edit-cheif-request')
+  }
 
   render() {
     const { data } = this.state;
@@ -51,7 +51,7 @@ class RiderRegistraionReuqest extends Component {
     console.log(data);
     return (
       <div className="margin-top-62px">
-        {/* <AppDrawer ref={(cd) => this.child = cd} /> */}
+        <RiderRequestDrawer editRequest={this.editRequest} ref={(cd) => this.child = cd} />
         <AppTable
           type={"riderRequestColumns"}
           data={data}
@@ -69,7 +69,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    changeDrawerState: (payload) => { dispatch({ type: "CHANGE_DRAWER_STATE",payload:payload }) }
+    selectRiderRequest: (obj) => { dispatch({ type: "SELECT_RIDER_REQUEST", payload: obj }) },
+    openDrawer: () => { dispatch({ type: 'OPEN_RIDER_REQUEST_DRAWER' }) }
   }
 }
 
