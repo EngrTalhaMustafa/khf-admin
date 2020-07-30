@@ -1,31 +1,36 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
-// import auth from "./auth";
+import { useDispatch, useSelector } from "react-redux";
+
 
 export const ProtectedRoute = ({
-  component: Component,
-  ...rest
+    component: Component,
+    ...rest
 }) => {
-  return (
-    <Route
-      {...rest}
-      render={props => {
-        if (false) {
-          return <Component {...props.Children} />;
-        } else {
-            console.log("ee")
-          return (
-            <Redirect
-              to={{
-                pathname: "/login",
-                state: {
-                  from: props.location
+    const authState = useSelector(state => state.authState);
+    return (
+        <Route
+            {...rest}
+            render={props => {
+                if (authState) {
+                    return <Component {...props.Children} />;
+                } else {
+                    return (
+                        <Redirect
+                            to={{
+                                pathname: "/login",
+                                state: {
+                                    from: props.location
+                                }
+                            }}
+                        />
+                    );
                 }
-              }}
-            />
-          );
-        }
-      }}
-    />
-  );
+            }}
+        />
+    );
 };
+
+
+
+export default (ProtectedRoute);

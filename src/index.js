@@ -3,16 +3,32 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { Provider} from 'react-redux';
+import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-// import rootReducer from './store/reducers/rootReducer';
+
+import { persistStore, persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
+import { PersistGate } from 'redux-persist/integration/react';
+
 import reducer from './store/reducers/reducer';
-const store = createStore(reducer)
+
+const persistConfig = {
+    key: 'root',
+    storage,
+}
+
+const persistedReducer = persistReducer(persistConfig, reducer)
+
+let store = createStore(persistedReducer)
+let persistor = persistStore(store)
+
 
 const app = (
     <Provider store={store}>
-        <App />
-     </Provider>
+        <PersistGate loading={null} persistor={persistor}>
+            <App />
+        </PersistGate>
+    </Provider>
 )
 
 ReactDOM.render(app, document.getElementById('root'));

@@ -6,7 +6,10 @@ const initialState = {
     riderRequestDrawerState: false,
     riderRequestDrawerData: {},
     orderDrawerState: false,
-    orderDrawerData: {}
+    orderDrawerData: {},
+    token:'',
+    admin:{},
+    authState:false,
 };
 
 
@@ -84,7 +87,16 @@ const reducer = (state = initialState, action) => {
                 orderDrawerState: false
             }
             break;
-
+        
+        case actionTypes.LOGIN_SUCCESS:
+            return {
+                ...state,
+                authState: true,
+                token: action.payload.token,
+                user:action.payload.user
+            }
+            break;
+            
         default:
             return state;
     }

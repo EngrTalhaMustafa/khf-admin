@@ -3,13 +3,15 @@ import api from '../../api';
 import { Form, Input, Button } from 'antd';
 import { layout, tailLayout, style } from './login.layout'
 import '../../App.css';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 class LoginPage extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            userName: '',
+            eamil: '',
             password: ''
         }
         this.changeHandler = this.changeHandler.bind(this);
@@ -24,11 +26,13 @@ class LoginPage extends Component {
 
     submitHandler(e) {
         e.preventDefault();
-        const { userName, password } = this.state;
-        if (userName && password) {
-            api.post('/user/login', { userName, password })
-                .then(user => {
-                    console.log("success", user)
+        const { email, password } = this.state;
+        if (email && password) {
+            api.post('/auth/admin/login', { email, password })
+                .then(({data}) => {
+                    console.log("success", data)
+                    this.props.loginSuccess({token:data.token,user:data.user});
+                    this.props.history.push('/')
                 })
                 .catch(e => {
                     console.log('failure', e)
@@ -48,20 +52,20 @@ class LoginPage extends Component {
                         remember: true,
                     }}
                     layout="vertical"
-                    style={{width:'500px',marginTop:'200px'}}
+                    style={{ width: '500px', marginTop: '200px' }}
                     onSubmit={this.submitHandler}
                 >
                     <Form.Item
-                        label="Username"
-                        name="userName"
+                        label="Email"
+                        name="email"
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input your username!',
+                                message: 'Please input your email!',
                             },
                         ]}
                     >
-                        <Input name="userName" onChange={this.changeHandler} />
+                        <Input name="email" onChange={this.changeHandler} />
                     </Form.Item>
 
                     <Form.Item
@@ -88,4 +92,16 @@ class LoginPage extends Component {
     }
 }
 
-export default LoginPage;
+
+
+const mapStateToProps = (state) => {
+    return {
+
+    }
+}
+const mapDispatchToProps = (dispatch) => {
+    return {
+        loginSuccess: (obj) => { dispatch({ type: "LOGIN_SUCCESS", payload: obj }) },
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(LoginPage));
